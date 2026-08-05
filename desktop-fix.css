@@ -1,0 +1,50 @@
+/* Ajustes exclusivos para desktop/notebook.
+   Mantém o layout mobile original. */
+@media (min-width: 821px) {
+  .featured-categories {
+    width: min(1180px, calc(100% - 72px));
+  }
+
+  .category-cards {
+    grid-template-columns: repeat(3, minmax(220px, 320px));
+    justify-content: center;
+    align-items: stretch;
+    gap: clamp(18px, 2vw, 28px);
+  }
+
+  .category-card {
+    width: 100%;
+    height: clamp(220px, 15vw, 270px);
+    aspect-ratio: auto;
+    border-radius: 20px;
+  }
+
+  .category-symbol {
+    width: 58px;
+    height: 58px;
+    border-radius: 17px;
+    font-size: 19px;
+  }
+
+  .category-card strong {
+    font-size: clamp(21px, 1.5vw, 26px);
+  }
+
+  .category-card span {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .featured-categories {
+    width: min(1080px, calc(100% - 120px));
+  }
+
+  .category-cards {
+    grid-template-columns: repeat(3, minmax(240px, 300px));
+  }
+
+  .category-card {
+    height: 250px;
+  }
+}
