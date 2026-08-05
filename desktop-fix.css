@@ -1,3 +1,5 @@
+@import url("similar-fix.css");
+
 /* Ajustes exclusivos para desktop/notebook.
    Mantém o layout mobile original. */
 @media (min-width: 821px) {
