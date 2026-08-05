@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="KNXITS Store — loja limpa de sensibilidades e configurações para jogos mobile." />
+  <meta name="theme-color" content="#050b18" />
+  <meta name="description" content="KNXITS Store — loja dark blue de sensibilidades e configurações para jogos mobile." />
   <title>KNXITS Store — Sensi para jogos</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+
   <header class="app-header">
     <div class="container header-content">
       <a class="brand" href="#inicio" data-route="home" aria-label="Página inicial KNXITS">
@@ -54,21 +57,24 @@
       <section class="hero" id="inicio">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <span class="kicker">Loja digital de sensibilidade</span>
-            <h1>Sensi pronta, organizada e fácil de comprar.</h1>
-            <p>Catálogo limpo para vender configurações digitais de jogos mobile. O cliente escolhe o produto, lê os detalhes e finaliza no método de pagamento.</p>
+            <span class="kicker">Loja digital dark blue</span>
+            <h1>Sensi pronta, compra rápida e visual premium.</h1>
+            <p>Uma loja limpa em tema azul escuro para vender configurações digitais. O cliente escolhe o produto, abre a descrição e finaliza no Pix, cartão ou crypto.</p>
             <div class="hero-actions">
               <a class="primary-button" href="#produtos">Ver produtos</a>
               <a class="outline-button" href="#como-funciona">Como funciona</a>
             </div>
           </div>
 
-          <div class="hero-panel" aria-hidden="true">
-            <div class="hero-card-preview">
-              <span>Produto em destaque</span>
-              <strong>Sensi Pro Android</strong>
-              <p>Controle + puxada</p>
-              <small>R$ 19,90</small>
+          <div class="hero-phone" aria-hidden="true">
+            <div class="phone-shell">
+              <div class="phone-top"><span></span></div>
+              <div class="phone-logo"><i>◆</i><strong>KNX Pay</strong></div>
+              <p>Cobrança gerada</p>
+              <span>Valor</span>
+              <h2>R$ 149,90</h2>
+              <div class="mini-qr"><i></i></div>
+              <small>Seus dados estão protegidos</small>
             </div>
           </div>
         </div>
@@ -79,19 +85,18 @@
           <div class="section-title-row">
             <div>
               <span class="kicker">Catálogo</span>
-              <h2>Produtos</h2>
+              <h2>Produtos disponíveis</h2>
             </div>
-            <p>Cards simples, claros e sem poluição visual.</p>
+            <p>Cards escuros, limpos e organizados para o cliente entender rápido o que está comprando.</p>
           </div>
 
           <div class="toolbar">
             <div class="filter-row" id="filters">
-              <button class="filter active" data-filter="all" type="button">Todos</button>
-              <button class="filter" data-filter="free-fire" type="button">Free Fire</button>
-              <button class="filter" data-filter="blood-strike" type="button">Blood Strike</button>
-              <button class="filter" data-filter="cod-mobile" type="button">COD Mobile</button>
+              <button class="filter active" type="button" data-filter="all">Todos</button>
+              <button class="filter" type="button" data-filter="free-fire">Free Fire</button>
+              <button class="filter" type="button" data-filter="blood-strike">Blood Strike</button>
+              <button class="filter" type="button" data-filter="cod-mobile">COD Mobile</button>
             </div>
-
             <label class="search-box">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.4-4.4M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
               <input id="productSearch" type="search" placeholder="Buscar sensi..." autocomplete="off" />
@@ -101,7 +106,7 @@
           <div class="product-grid" id="productGrid"></div>
           <div class="empty-state" id="emptyState">
             <strong>Nenhum produto encontrado</strong>
-            <p>Tente outro nome ou categoria.</p>
+            <p>Tente outro filtro ou outra palavra.</p>
           </div>
         </div>
       </section>
@@ -111,26 +116,13 @@
           <div class="section-title-row">
             <div>
               <span class="kicker">Fluxo</span>
-              <h2>Como a compra funciona</h2>
+              <h2>Compra em três passos</h2>
             </div>
           </div>
-
-          <div class="steps-grid">
-            <article>
-              <span>1</span>
-              <h3>Escolhe o produto</h3>
-              <p>O cliente clica no card e abre uma tela com imagem, descrição e preço.</p>
-            </article>
-            <article>
-              <span>2</span>
-              <h3>Clica em comprar</h3>
-              <p>Depois dos detalhes, ele avança para a tela de pagamento.</p>
-            </article>
-            <article>
-              <span>3</span>
-              <h3>Seleciona pagamento</h3>
-              <p>Pix, cartão ou crypto moedas ficam disponíveis na finalização.</p>
-            </article>
+          <div class="step-grid">
+            <article><span>1</span><h3>Abre o produto</h3><p>O cliente vê imagem, descrição, compatibilidade e preço.</p></article>
+            <article><span>2</span><h3>Escolhe o pagamento</h3><p>Pix, cartão ou crypto moedas em uma tela dark azul.</p></article>
+            <article><span>3</span><h3>Recebe a sensi</h3><p>Depois conectamos backend e webhook para liberar automaticamente.</p></article>
           </div>
         </div>
       </section>
@@ -143,19 +135,14 @@
               <h2>Perguntas frequentes</h2>
             </div>
           </div>
-
           <div class="faq-list">
             <details>
-              <summary>O pagamento já cobra de verdade?</summary>
-              <p>Não. A tela está pronta, mas ainda precisa de API real de pagamento e webhook seguro.</p>
+              <summary>O pagamento já está funcionando?</summary>
+              <p>A tela está pronta, mas ainda precisa conectar uma API real e webhook para confirmar pedidos com segurança.</p>
             </details>
             <details>
-              <summary>Posso trocar as imagens dos produtos?</summary>
-              <p>Sim. Os cards já estão preparados para receber imagem real depois.</p>
-            </details>
-            <details>
-              <summary>A entrega automática já está pronta?</summary>
-              <p>A parte visual está pronta. A entrega automática entra depois com backend e banco de dados.</p>
+              <summary>Dá para vender Pix, cartão e crypto?</summary>
+              <p>Sim. A interface já tem as três opções; depois conectamos cada uma no provedor correto.</p>
             </details>
           </div>
         </div>
@@ -173,7 +160,7 @@
           <div class="detail-image-card">
             <div class="product-art detail-art" id="detailArt">
               <span class="art-badge" id="detailBadge">Free Fire</span>
-              <div class="art-lines"><span></span><span></span><span></span></div>
+              <div class="art-device"><span></span><span></span><span></span><span></span></div>
               <strong id="detailArtTitle">Sensi Pro</strong>
               <small id="detailArtSubtitle">Configuração digital</small>
             </div>
@@ -183,7 +170,6 @@
             <span class="kicker" id="detailLabel">Produto</span>
             <h1 id="detailTitle">Nome do produto</h1>
             <p id="detailDescription">Descrição do produto.</p>
-
             <div class="detail-price-row">
               <div>
                 <span class="old-price" id="detailOldPrice">R$ 0,00</span>
@@ -192,20 +178,11 @@
               </div>
               <span class="discount-pill" id="detailDiscount">-0%</span>
             </div>
-
-            <div class="detail-box">
-              <h3>O que você recebe</h3>
-              <ul id="detailIncludes"></ul>
-            </div>
-
-            <div class="detail-box soft-box">
-              <h3>Compatibilidade</h3>
-              <p id="detailCompatibility">Android mobile.</p>
-            </div>
-
+            <div class="detail-box"><h3>O que você recebe</h3><ul id="detailIncludes"></ul></div>
+            <div class="detail-box soft-box"><h3>Compatibilidade</h3><p id="detailCompatibility">Android mobile.</p></div>
             <div class="detail-actions">
               <button class="primary-button large" type="button" id="goCheckoutButton">Comprar agora</button>
-              <button class="outline-button large" type="button" data-back-home>Escolher outro</button>
+              <button class="outline-button large" type="button" id="copyProductButton">Copiar nome</button>
             </div>
           </article>
         </div>
@@ -220,47 +197,38 @@
         </button>
 
         <div class="checkout-layout">
-          <aside class="order-summary">
-            <span class="kicker">Resumo</span>
-            <h1>Finalizar compra</h1>
-            <div class="summary-product">
-              <div class="summary-thumb product-art" id="summaryArt"></div>
-              <div>
-                <strong id="summaryTitle">Produto</strong>
-                <span id="summaryLabel">Jogo</span>
+          <aside class="pay-phone-card">
+            <div class="pay-phone">
+              <div class="phone-top"><span></span></div>
+              <div class="phone-logo"><i>◆</i><strong>KNX Pay</strong></div>
+              <p id="paymentStatusTitle">Cobrança gerada</p>
+              <span>Valor</span>
+              <h2 id="summaryTotalPhone">R$ 0,00</h2>
+              <div class="qr-card">
+                <small>Escaneie o QR Code para pagar</small>
+                <div class="qr-code" aria-hidden="true"></div>
               </div>
+              <em>Seus dados estão protegidos</em>
             </div>
-
-            <div class="summary-line"><span>Subtotal</span><strong id="summarySubtotal">R$ 0,00</strong></div>
-            <div class="summary-line"><span>Entrega digital</span><strong>Grátis</strong></div>
-            <div class="summary-total"><span>Total</span><strong id="summaryTotal">R$ 0,00</strong></div>
-            <p class="summary-note">Nenhuma cobrança real será feita até conectar uma API de pagamento.</p>
           </aside>
 
           <section class="payment-card">
-            <span class="kicker">Pagamento</span>
-            <h2>Escolha a forma de pagamento</h2>
-
-            <div class="payment-methods" id="paymentMethods">
-              <button class="payment-option active" type="button" data-method="pix">
-                <span class="payment-icon">◇</span>
-                <strong>Pix</strong>
-                <small>Aprovação rápida</small>
-              </button>
-              <button class="payment-option" type="button" data-method="card">
-                <span class="payment-icon">▣</span>
-                <strong>Cartão</strong>
-                <small>Crédito ou débito</small>
-              </button>
-              <button class="payment-option" type="button" data-method="crypto">
-                <span class="payment-icon">₿</span>
-                <strong>Crypto moedas</strong>
-                <small>USDT, BTC ou ETH</small>
-              </button>
+            <span class="kicker">Checkout</span>
+            <h1>Finalizar compra</h1>
+            <div class="summary-product">
+              <div class="summary-thumb product-art" id="summaryArt"></div>
+              <div><strong id="summaryTitle">Produto</strong><span id="summaryLabel">Jogo</span></div>
             </div>
+            <div class="summary-line"><span>Subtotal</span><strong id="summarySubtotal">R$ 0,00</strong></div>
+            <div class="summary-line"><span>Entrega digital</span><strong>Grátis</strong></div>
 
+            <h2>Forma de pagamento</h2>
+            <div class="payment-methods" id="paymentMethods">
+              <button class="payment-option active" type="button" data-method="pix"><span>◇</span><strong>Pix</strong><small>QR Code e copia e cola</small></button>
+              <button class="payment-option" type="button" data-method="card"><span>▣</span><strong>Cartão</strong><small>Crédito ou débito</small></button>
+              <button class="payment-option" type="button" data-method="crypto"><span>₿</span><strong>Crypto moedas</strong><small>USDT, BTC ou ETH</small></button>
+            </div>
             <div class="payment-panel" id="paymentPanel"></div>
-
             <button class="primary-button large full" id="finishOrderButton" type="button">Continuar pagamento</button>
           </section>
         </div>
@@ -269,7 +237,6 @@
   </main>
 
   <div class="toast" id="toast" role="status"></div>
-
   <script src="app.js"></script>
 </body>
 </html>
