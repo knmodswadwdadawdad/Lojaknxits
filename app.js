@@ -116,11 +116,13 @@ const els = {
   detailIncludes: document.getElementById("detailIncludes"),
   detailCompatibility: document.getElementById("detailCompatibility"),
   goCheckoutButton: document.getElementById("goCheckoutButton"),
+  copyProductButton: document.getElementById("copyProductButton"),
   summaryArt: document.getElementById("summaryArt"),
   summaryTitle: document.getElementById("summaryTitle"),
   summaryLabel: document.getElementById("summaryLabel"),
   summarySubtotal: document.getElementById("summarySubtotal"),
-  summaryTotal: document.getElementById("summaryTotal"),
+  summaryTotalPhone: document.getElementById("summaryTotalPhone"),
+  paymentStatusTitle: document.getElementById("paymentStatusTitle"),
   paymentMethods: document.getElementById("paymentMethods"),
   paymentPanel: document.getElementById("paymentPanel"),
   finishOrderButton: document.getElementById("finishOrderButton"),
@@ -182,21 +184,23 @@ function productCard(product) {
 }
 
 function renderProducts() {
-  const list = filteredProducts();
-  els.productGrid.innerHTML = list.map(productCard).join("");
-  els.productGrid.style.display = list.length ? "grid" : "none";
-  els.emptyState.style.display = list.length ? "grid" : "none";
+  const items = filteredProducts();
+  els.productGrid.innerHTML = items.map(productCard).join("");
+  els.productGrid.style.display = items.length ? "grid" : "none";
+  els.emptyState.style.display = items.length ? "none" : "block";
 }
 
-function setProductArt(element, product) {
+function setArtTheme(element, product) {
   element.className = `product-art ${product.theme}`;
 }
 
 function openProduct(productId) {
-  const product = products.find(item => item.id === productId) || products[0];
-  state.selectedProduct = product;
+  const product = products.find(item => item.id === productId);
+  if (!product) return;
 
-  setProductArt(els.detailArt, product);
+  state.selectedProduct = product;
+  setArtTheme(els.detailArt, product);
+  els.detailArt.classList.add("detail-art");
   els.detailBadge.textContent = product.label;
   els.detailArtTitle.textContent = product.title;
   els.detailArtSubtitle.textContent = product.short;
@@ -206,80 +210,69 @@ function openProduct(productId) {
   els.detailOldPrice.textContent = formatPrice(product.oldPrice);
   els.detailPrice.textContent = formatPrice(product.price);
   els.detailDiscount.textContent = `-${product.discount}%`;
-  els.detailIncludes.innerHTML = product.includes.map(item => `<li>${item}</li>`).join("");
   els.detailCompatibility.textContent = product.compatibility;
+  els.detailIncludes.innerHTML = product.includes.map(item => `<li>${item}</li>`).join("");
 
   showView("product");
 }
 
-function renderCheckout() {
-  const product = state.selectedProduct || products[0];
-  setProductArt(els.summaryArt, product);
+function openCheckout() {
+  const product = state.selectedProduct;
+  setArtTheme(els.summaryArt, product);
   els.summaryTitle.textContent = product.title;
   els.summaryLabel.textContent = product.label;
   els.summarySubtotal.textContent = formatPrice(product.price);
-  els.summaryTotal.textContent = formatPrice(product.price);
+  els.summaryTotalPhone.textContent = formatPrice(product.price);
   renderPaymentPanel();
-}
-
-function openCheckout() {
-  renderCheckout();
   showView("checkout");
 }
 
 function renderPaymentPanel() {
-  const product = state.selectedProduct || products[0];
-  const panels = {
-    pix: `
-      <h3>Pagamento via Pix</h3>
-      <p>Ideal para aprovação rápida. Depois conectamos a API para gerar QR Code e copia e cola real.</p>
-      <div class="payment-info-grid">
-        <div><span>Produto</span><strong>${product.title}</strong></div>
-        <div><span>Total</span><strong>${formatPrice(product.price)}</strong></div>
-        <div><span>Status</span><strong>Aguardando integração Pix</strong></div>
-      </div>
-    `,
-    card: `
-      <h3>Pagamento com cartão</h3>
-      <p>Área preparada para cartão de crédito ou débito. Os campos reais devem vir do provedor de pagamento.</p>
-      <div class="payment-info-grid">
-        <div><span>Bandeiras</span><strong>Visa, Mastercard e outras</strong></div>
-        <div><span>Segurança</span><strong>Checkout tokenizado</strong></div>
-        <div><span>Status</span><strong>Aguardando API de cartão</strong></div>
-      </div>
-    `,
-    crypto: `
-      <h3>Pagamento com crypto moedas</h3>
-      <p>Área preparada para USDT, BTC ou ETH. Depois conectamos carteira/gateway e confirmação automática.</p>
-      <div class="payment-info-grid">
-        <div><span>Moedas</span><strong>USDT, BTC, ETH</strong></div>
-        <div><span>Rede</span><strong>Definir no backend</strong></div>
-        <div><span>Status</span><strong>Aguardando integração crypto</strong></div>
-      </div>
-    `
-  };
+  const product = state.selectedProduct;
+  const price = formatPrice(product.price);
 
-  els.paymentPanel.innerHTML = panels[state.paymentMethod];
+  if (state.paymentMethod === "pix") {
+    els.paymentStatusTitle.textContent = "Cobrança Pix gerada";
+    els.paymentPanel.innerHTML = `
+      <strong>Pagamento via Pix</strong>
+      <p>Escaneie o QR Code ao lado ou use o copia e cola. Depois que conectarmos a API, o pedido será confirmado por webhook.</p>
+      <code>00020126580014BR.GOV.BCB.PIX0136KNXITS-${product.id.toUpperCase()}520400005303986540${product.price.toFixed(2)}5802BR5925KNXITS STORE6009SAO PAULO62070503***6304ABCD</code>
+    `;
+  }
+
+  if (state.paymentMethod === "card") {
+    els.paymentStatusTitle.textContent = "Pagamento no cartão";
+    els.paymentPanel.innerHTML = `
+      <strong>Cartão de crédito ou débito</strong>
+      <p>Interface pronta para conectar Mercado Pago, Stripe ou outro gateway. Valor do pedido: ${price}.</p>
+      <div class="input-grid">
+        <div class="fake-input">Número do cartão</div>
+        <div class="fake-input">Nome impresso</div>
+        <div class="fake-input">Validade</div>
+        <div class="fake-input">CVV</div>
+      </div>
+    `;
+  }
+
+  if (state.paymentMethod === "crypto") {
+    els.paymentStatusTitle.textContent = "Pagamento em crypto";
+    els.paymentPanel.innerHTML = `
+      <strong>Crypto moedas</strong>
+      <p>Opção visual preparada para USDT, BTC ou ETH. O ideal é usar um gateway crypto para gerar endereço único e confirmar a transação.</p>
+      <code>USDT TRC20 / BTC / ETH — carteira gerada pela API no backend</code>
+    `;
+  }
 }
 
-let toastTimer;
 function showToast(message) {
   els.toast.textContent = message;
   els.toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => els.toast.classList.remove("show"), 2400);
+  setTimeout(() => els.toast.classList.remove("show"), 2400);
 }
-
-els.productGrid.addEventListener("click", event => {
-  const button = event.target.closest("[data-action='details']");
-  if (!button) return;
-  openProduct(button.dataset.id);
-});
 
 els.filters.addEventListener("click", event => {
   const button = event.target.closest(".filter");
   if (!button) return;
-
   document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
   button.classList.add("active");
   state.filter = button.dataset.filter;
@@ -291,20 +284,40 @@ els.productSearch.addEventListener("input", event => {
   renderProducts();
 });
 
+els.productGrid.addEventListener("click", event => {
+  const button = event.target.closest("[data-action='details']");
+  if (!button) return;
+  openProduct(button.dataset.id);
+});
+
 els.searchFocus.addEventListener("click", () => {
   showView("home");
-  setTimeout(() => {
-    document.getElementById("produtos").scrollIntoView({ behavior: "smooth" });
-    els.productSearch.focus();
-  }, 150);
+  document.getElementById("produtos").scrollIntoView({ behavior: "smooth" });
+  setTimeout(() => els.productSearch.focus(), 350);
 });
 
 els.goCheckoutButton.addEventListener("click", openCheckout);
+els.copyProductButton.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(state.selectedProduct.title);
+    showToast("Nome do produto copiado.");
+  } catch (error) {
+    showToast("Produto: " + state.selectedProduct.title);
+  }
+});
+
+document.querySelectorAll("[data-back-home]").forEach(button => button.addEventListener("click", () => showView("home")));
+document.querySelectorAll("[data-back-product]").forEach(button => button.addEventListener("click", () => showView("product")));
+document.querySelectorAll("[data-route='home']").forEach(link => {
+  link.addEventListener("click", () => {
+    showView("home");
+    els.mobileMenu.classList.remove("open");
+  });
+});
 
 els.paymentMethods.addEventListener("click", event => {
   const button = event.target.closest(".payment-option");
   if (!button) return;
-
   document.querySelectorAll(".payment-option").forEach(item => item.classList.remove("active"));
   button.classList.add("active");
   state.paymentMethod = button.dataset.method;
@@ -312,36 +325,12 @@ els.paymentMethods.addEventListener("click", event => {
 });
 
 els.finishOrderButton.addEventListener("click", () => {
-  const labels = { pix: "Pix", card: "cartão", crypto: "crypto moedas" };
-  showToast(`Pagamento por ${labels[state.paymentMethod]} pronto para conectar na API.`);
-});
-
-document.querySelectorAll("[data-back-home], [data-route='home']").forEach(element => {
-  element.addEventListener("click", event => {
-    event.preventDefault();
-    showView("home");
-    const href = element.getAttribute("href");
-    if (href && href.startsWith("#")) {
-      setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: "smooth" }), 120);
-    }
-  });
-});
-
-document.querySelectorAll("[data-back-product]").forEach(element => {
-  element.addEventListener("click", () => showView("product"));
+  showToast("Pronto para conectar a API de pagamento.");
 });
 
 els.menuToggle.addEventListener("click", () => {
-  const open = els.mobileMenu.classList.toggle("open");
-  els.menuToggle.classList.toggle("active", open);
-});
-
-els.mobileMenu.addEventListener("click", event => {
-  if (!event.target.closest("a")) return;
-  els.mobileMenu.classList.remove("open");
-  els.menuToggle.classList.remove("active");
+  els.mobileMenu.classList.toggle("open");
 });
 
 renderProducts();
-openProduct(products[0].id);
-showView("home");
+renderPaymentPanel();
