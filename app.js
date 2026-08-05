@@ -1,75 +1,75 @@
 const products = [
   {
-    id: "ff-pro-max",
+    id: "ff-pro",
     game: "free-fire",
-    gameLabel: "Free Fire",
-    title: "Sensi FFH4X Pro Max Android — Atualizada 🎯",
-    artTitle: "SENSI FF",
-    artSub: "PERFEITA",
-    artTag: "MÁXIMO DE CAPA",
-    oldPrice: 59.90,
+    category: "android",
+    label: "Free Fire",
+    title: "Sensi Pro Android",
+    description: "Configuração equilibrada para puxada de capa, controle e movimentação.",
+    oldPrice: 49.90,
     price: 19.90,
+    discount: 60,
     theme: "green"
   },
   {
-    id: "ff-xitada",
+    id: "ff-rush",
     game: "free-fire",
-    gameLabel: "Free Fire",
-    title: "Sensi Mobile Xitada Android — Precisão FF 🔥",
-    artTitle: "SENSI",
-    artSub: "XITADA MOBILE",
-    artTag: "ALTA PRECISÃO",
-    oldPrice: 69.90,
+    category: "android",
+    label: "Free Fire",
+    title: "Sensi Rush Mobile",
+    description: "Perfil mais rápido para quem joga avançando e quer resposta leve.",
+    oldPrice: 59.90,
     price: 24.90,
-    theme: "cyan"
-  },
-  {
-    id: "ff-emulator",
-    game: "free-fire",
-    gameLabel: "Free Fire",
-    title: "Sensi Emulador Mobile — Controle Total 🎮",
-    artTitle: "SENSI",
-    artSub: "NÍVEL EMULADOR",
-    artTag: "CONTROLE TOTAL",
-    oldPrice: 79.90,
-    price: 29.90,
-    theme: "purple"
-  },
-  {
-    id: "ff-ranked",
-    game: "free-fire",
-    gameLabel: "Free Fire",
-    title: "Sensi Competitiva Android — Ranqueada 🏆",
-    artTitle: "SENSI",
-    artSub: "COMPETITIVA",
-    artTag: "RANQUEADA",
-    oldPrice: 89.90,
-    price: 29.90,
-    theme: "red"
-  },
-  {
-    id: "bs-tracking",
-    game: "blood-strike",
-    gameLabel: "Blood Strike",
-    title: "Sensi Tracking Pro Mobile — Precisão e Controle",
-    artTitle: "TRACKING",
-    artSub: "PRO MOBILE",
-    artTag: "BLOOD STRIKE",
-    oldPrice: 64.90,
-    price: 22.90,
+    discount: 58,
     theme: "blue"
+  },
+  {
+    id: "ff-clean",
+    game: "free-fire",
+    category: "android",
+    label: "Free Fire",
+    title: "Sensi Balance",
+    description: "Base suave e estável para adaptar ao seu aparelho sem exagero.",
+    oldPrice: 39.90,
+    price: 14.90,
+    discount: 63,
+    theme: "yellow"
+  },
+  {
+    id: "blood-tracking",
+    game: "blood-strike",
+    category: "android",
+    label: "Blood Strike",
+    title: "Tracking Setup",
+    description: "Ajuste focado em rastrear alvo e manter estabilidade durante trocação.",
+    oldPrice: 69.90,
+    price: 29.90,
+    discount: 57,
+    theme: "red"
   },
   {
     id: "cod-tactical",
     game: "cod-mobile",
-    gameLabel: "COD Mobile",
-    title: "Sensi Tactical Mobile — Mira Estável e Rápida",
-    artTitle: "TACTICAL",
-    artSub: "MOBILE PRO",
-    artTag: "COD MOBILE",
-    oldPrice: 74.90,
-    price: 27.90,
-    theme: "orange"
+    category: "android",
+    label: "COD Mobile",
+    title: "Tactical Sensi",
+    description: "Configuração organizada por mira, indicada para precisão e controle.",
+    oldPrice: 79.90,
+    price: 34.90,
+    discount: 56,
+    theme: "blue"
+  },
+  {
+    id: "pack-completo",
+    game: "free-fire",
+    category: "android",
+    label: "Pack",
+    title: "Pack Completo Mobile",
+    description: "Pacote com perfis diferentes para testar e escolher o melhor para você.",
+    oldPrice: 99.90,
+    price: 44.90,
+    discount: 55,
+    theme: "green"
   }
 ];
 
@@ -82,217 +82,143 @@ const state = {
 const els = {
   productGrid: document.getElementById("productGrid"),
   emptyState: document.getElementById("emptyState"),
-  categoryChips: document.getElementById("categoryChips"),
-  sectionTitle: document.getElementById("sectionTitle"),
   productSearch: document.getElementById("productSearch"),
-  searchPanel: document.getElementById("searchPanel"),
-  searchToggle: document.getElementById("searchToggle"),
-  searchClose: document.getElementById("searchClose"),
-  exploreButton: document.getElementById("exploreButton"),
-  seeAll: document.getElementById("seeAll"),
+  searchFocus: document.getElementById("searchFocus"),
+  categoryButtons: document.querySelectorAll(".category-chip"),
   cartToggle: document.getElementById("cartToggle"),
-  cartClose: document.getElementById("cartClose"),
   cartDrawer: document.getElementById("cartDrawer"),
+  cartClose: document.getElementById("cartClose"),
+  overlay: document.getElementById("overlay"),
   cartItems: document.getElementById("cartItems"),
   cartEmpty: document.getElementById("cartEmpty"),
   cartFooter: document.getElementById("cartFooter"),
-  cartTotal: document.getElementById("cartTotal"),
   cartCount: document.getElementById("cartCount"),
+  cartTotal: document.getElementById("cartTotal"),
   checkoutButton: document.getElementById("checkoutButton"),
-  overlay: document.getElementById("overlay"),
   toast: document.getElementById("toast"),
-  accountButton: document.getElementById("accountButton"),
   menuToggle: document.getElementById("menuToggle"),
   mobileMenu: document.getElementById("mobileMenu"),
   year: document.getElementById("year")
 };
 
-function formatPrice(value) {
+function formatMoney(value) {
   return value.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL"
   });
 }
 
-function discountPercent(oldPrice, price) {
-  return Math.round((1 - price / oldPrice) * 100);
-}
-
 function loadCart() {
   try {
-    const saved = JSON.parse(localStorage.getItem("knxits-cart") || "[]");
-    if (!Array.isArray(saved)) return [];
-    return saved.filter(id => products.some(product => product.id === id));
+    const saved = JSON.parse(localStorage.getItem("knxits-clean-cart") || "[]");
+    return Array.isArray(saved) ? saved : [];
   } catch (error) {
     return [];
   }
 }
 
 function saveCart() {
-  localStorage.setItem("knxits-cart", JSON.stringify(state.cart));
+  localStorage.setItem("knxits-clean-cart", JSON.stringify(state.cart));
 }
 
-function cartIcon() {
-  return `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L20.5 8H6"></path>
-      <circle cx="9" cy="20" r="1"></circle>
-      <circle cx="18" cy="20" r="1"></circle>
-    </svg>
-  `;
-}
-
-function pixIcon() {
-  return `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="m8.2 5.1 3.8-3.8 3.8 3.8a3.4 3.4 0 0 0 4.8 0"></path>
-      <path d="m18.9 8.2 3.8 3.8-3.8 3.8a3.4 3.4 0 0 0 0 4.8"></path>
-      <path d="m15.8 18.9-3.8 3.8-3.8-3.8a3.4 3.4 0 0 0-4.8 0"></path>
-      <path d="m5.1 15.8-3.8-3.8 3.8-3.8a3.4 3.4 0 0 0 0-4.8"></path>
-      <path d="m8 8 8 8m0-8-8 8"></path>
-    </svg>
-  `;
-}
-
-function boltIcon() {
-  return `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"></path>
-    </svg>
-  `;
-}
-
-function productTemplate(product) {
-  const discount = discountPercent(product.oldPrice, product.price);
-
-  return `
-    <article class="product-card theme-${product.theme}" data-id="${product.id}">
-      <div class="product-art">
-        <span class="flash-badge">ϟ</span>
-        <span class="art-crosshair"></span>
-        <span class="art-panel"></span>
-        <div class="art-title">
-          <div>
-            <strong>${product.artTitle}</strong>
-            <em>${product.artSub}</em>
-          </div>
-          <small>${product.artTag}</small>
-        </div>
-      </div>
-
-      <div class="product-body">
-        <h3 class="product-title">${product.title}</h3>
-
-        <div class="product-price-row">
-          <span class="old-price">${formatPrice(product.oldPrice)}</span>
-          <span class="discount">↘ ${discount}%</span>
-        </div>
-
-        <strong class="current-price">${formatPrice(product.price)}</strong>
-
-        <div class="pix-row">
-          <span>À vista no PIX</span>
-          <div class="mini-actions">
-            <button class="product-mini-action" type="button" data-info="pix" aria-label="Pagamento via Pix">${pixIcon()}</button>
-            <button class="product-mini-action" type="button" data-info="delivery" aria-label="Entrega digital">${boltIcon()}</button>
-          </div>
-        </div>
-
-        <button class="product-buy" type="button" data-buy="${product.id}">
-          ${cartIcon()}
-          Comprar agora
-        </button>
-      </div>
-    </article>
-  `;
+function getProductById(id) {
+  return products.find(product => product.id === id);
 }
 
 function getFilteredProducts() {
   const term = state.search.trim().toLowerCase();
 
   return products.filter(product => {
-    const filterMatch = state.filter === "all" || product.game === state.filter;
-    const text = `${product.title} ${product.gameLabel} ${product.artTitle} ${product.artSub}`.toLowerCase();
-    const searchMatch = !term || text.includes(term);
-    return filterMatch && searchMatch;
+    const matchesFilter = state.filter === "all" || product.game === state.filter || product.category === state.filter;
+    const text = `${product.title} ${product.description} ${product.label}`.toLowerCase();
+    const matchesSearch = !term || text.includes(term);
+    return matchesFilter && matchesSearch;
   });
+}
+
+function productTemplate(product) {
+  return `
+    <article class="product-card">
+      <div class="product-media ${product.theme}">
+        <span class="product-badge">${product.label}</span>
+      </div>
+      <div class="product-content">
+        <div class="product-topline">
+          <span>Digital</span>
+          <span>Android</span>
+        </div>
+        <h3 class="product-title">${product.title}</h3>
+        <p class="product-description">${product.description}</p>
+
+        <div class="price-row">
+          <span class="old-price">${formatMoney(product.oldPrice)}</span>
+          <span class="discount">-${product.discount}%</span>
+        </div>
+        <strong class="current-price">${formatMoney(product.price)}</strong>
+        <span class="pix-text">À vista no PIX</span>
+
+        <div class="card-actions">
+          <button class="add-to-cart" type="button" data-add="${product.id}">Comprar</button>
+          <button class="details-button" type="button" data-info="${product.id}" aria-label="Ver detalhes de ${product.title}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function renderProducts() {
   const filtered = getFilteredProducts();
   els.productGrid.innerHTML = filtered.map(productTemplate).join("");
   els.productGrid.style.display = filtered.length ? "grid" : "none";
-  els.emptyState.style.display = filtered.length ? "none" : "grid";
-}
-
-function updateSectionTitle() {
-  const labels = {
-    all: "SENSIS EM DESTAQUE",
-    "free-fire": "SENSI FREE FIRE ANDROID",
-    "blood-strike": "SENSI BLOOD STRIKE",
-    "cod-mobile": "SENSI COD MOBILE"
-  };
-
-  els.sectionTitle.textContent = labels[state.filter] || labels.all;
-}
-
-function applyFilter(filter) {
-  state.filter = filter;
-  document.querySelectorAll(".category-chip").forEach(button => {
-    button.classList.toggle("active", button.dataset.filter === filter);
-  });
-  updateSectionTitle();
-  renderProducts();
-}
-
-function cartItemTemplate(product) {
-  return `
-    <div class="cart-item">
-      <div class="cart-thumb">K</div>
-      <div class="cart-item-copy">
-        <strong>${product.title}</strong>
-        <span>${product.gameLabel}</span>
-      </div>
-      <div class="cart-item-side">
-        <strong>${formatPrice(product.price)}</strong>
-        <button type="button" data-remove="${product.id}">Remover</button>
-      </div>
-    </div>
-  `;
+  els.emptyState.style.display = filtered.length ? "grid" : "none";
 }
 
 function renderCart() {
-  const cartProducts = state.cart
-    .map(id => products.find(product => product.id === id))
-    .filter(Boolean);
+  const items = state.cart.map(getProductById).filter(Boolean);
+  const total = items.reduce((sum, product) => sum + product.price, 0);
 
-  const total = cartProducts.reduce((sum, product) => sum + product.price, 0);
+  els.cartCount.textContent = String(items.length);
+  els.cartTotal.textContent = formatMoney(total);
+  els.cartItems.innerHTML = items.map(product => `
+    <div class="cart-item">
+      <div class="cart-thumb"></div>
+      <div class="cart-info">
+        <strong>${product.title}</strong>
+        <span>${product.label}</span>
+      </div>
+      <div class="cart-price">
+        <strong>${formatMoney(product.price)}</strong>
+        <button class="remove-button" type="button" data-remove="${product.id}">Remover</button>
+      </div>
+    </div>
+  `).join("");
 
-  els.cartItems.innerHTML = cartProducts.map(cartItemTemplate).join("");
-  els.cartCount.textContent = String(cartProducts.length);
-  els.cartTotal.textContent = formatPrice(total);
-
-  const hasProducts = cartProducts.length > 0;
-  els.cartItems.style.display = hasProducts ? "block" : "none";
-  els.cartEmpty.style.display = hasProducts ? "grid" : "none";
-  els.cartFooter.style.display = hasProducts ? "block" : "none";
+  const hasItems = items.length > 0;
+  els.cartItems.style.display = hasItems ? "block" : "none";
+  els.cartEmpty.style.display = hasItems ? "none" : "grid";
+  els.cartFooter.style.display = hasItems ? "block" : "none";
 }
 
-function addToCart(productId, openAfter = false) {
-  const product = products.find(item => item.id === productId);
+function showToast(message) {
+  els.toast.textContent = message;
+  els.toast.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => els.toast.classList.remove("show"), 2200);
+}
+
+function addToCart(productId) {
+  const product = getProductById(productId);
   if (!product) return;
 
   if (!state.cart.includes(productId)) {
     state.cart.push(productId);
     saveCart();
     renderCart();
-    showToast(`${product.title} adicionado.`);
+    showToast(`${product.title} adicionado ao carrinho.`);
   } else {
-    showToast("Esse produto já está no carrinho.");
-  }
-
-  if (openAfter) {
-    setTimeout(openCart, 180);
+    showToast(`${product.title} já está no carrinho.`);
   }
 }
 
@@ -305,38 +231,37 @@ function removeFromCart(productId) {
 function openCart() {
   els.cartDrawer.classList.add("open");
   els.overlay.classList.add("show");
-  document.body.classList.add("locked");
+  document.body.classList.add("modal-open");
 }
 
 function closeCart() {
   els.cartDrawer.classList.remove("open");
   els.overlay.classList.remove("show");
-  document.body.classList.remove("locked");
+  document.body.classList.remove("modal-open");
 }
 
-function openSearch() {
-  els.searchPanel.classList.add("open");
-  document.getElementById("produtos").scrollIntoView({ behavior: "smooth", block: "start" });
-  setTimeout(() => els.productSearch.focus(), 400);
-}
+els.productGrid.addEventListener("click", event => {
+  const addButton = event.target.closest("[data-add]");
+  const infoButton = event.target.closest("[data-info]");
 
-function closeSearch() {
-  els.searchPanel.classList.remove("open");
-  els.productSearch.blur();
-}
+  if (addButton) {
+    addToCart(addButton.dataset.add);
+    return;
+  }
 
-let toastTimer;
-function showToast(message) {
-  els.toast.querySelector("p").textContent = message;
-  els.toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => els.toast.classList.remove("show"), 2200);
-}
+  if (infoButton) {
+    const product = getProductById(infoButton.dataset.info);
+    if (product) showToast(product.description);
+  }
+});
 
-els.categoryChips.addEventListener("click", event => {
-  const button = event.target.closest("[data-filter]");
-  if (!button) return;
-  applyFilter(button.dataset.filter);
+els.categoryButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    els.categoryButtons.forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+    state.filter = button.dataset.filter;
+    renderProducts();
+  });
 });
 
 els.productSearch.addEventListener("input", event => {
@@ -344,73 +269,36 @@ els.productSearch.addEventListener("input", event => {
   renderProducts();
 });
 
-els.productGrid.addEventListener("click", event => {
-  const buyButton = event.target.closest("[data-buy]");
-  if (buyButton) {
-    addToCart(buyButton.dataset.buy, true);
-    return;
-  }
-
-  const infoButton = event.target.closest("[data-info]");
-  if (infoButton) {
-    if (infoButton.dataset.info === "pix") showToast("Pagamento via PIX será habilitado no checkout.");
-    if (infoButton.dataset.info === "delivery") showToast("Produto com entrega digital após confirmação.");
-  }
-});
-
-els.cartItems.addEventListener("click", event => {
-  const button = event.target.closest("[data-remove]");
-  if (!button) return;
-  removeFromCart(button.dataset.remove);
-});
-
-els.searchToggle.addEventListener("click", openSearch);
-els.searchClose.addEventListener("click", closeSearch);
-
-els.exploreButton.addEventListener("click", () => {
-  els.categoryChips.scrollIntoView({ behavior: "smooth", block: "center" });
-  showToast("Escolha uma categoria abaixo.");
-});
-
-els.seeAll.addEventListener("click", () => {
-  state.search = "";
-  els.productSearch.value = "";
-  applyFilter("all");
+els.searchFocus.addEventListener("click", () => {
+  document.getElementById("produtos").scrollIntoView({ behavior: "smooth" });
+  setTimeout(() => els.productSearch.focus(), 350);
 });
 
 els.cartToggle.addEventListener("click", openCart);
 els.cartClose.addEventListener("click", closeCart);
 els.overlay.addEventListener("click", closeCart);
 
-els.accountButton.addEventListener("click", () => {
-  showToast("Área da conta pronta para conectar ao login.");
+els.cartItems.addEventListener("click", event => {
+  const button = event.target.closest("[data-remove]");
+  if (button) removeFromCart(button.dataset.remove);
 });
 
 els.checkoutButton.addEventListener("click", () => {
-  showToast("Próximo passo: conectar PIX/cartão ao checkout.");
+  showToast("Checkout pronto para conectar Pix/cartão.");
 });
 
 els.menuToggle.addEventListener("click", () => {
-  const open = els.mobileMenu.classList.toggle("open");
-  els.menuToggle.classList.toggle("active", open);
+  els.mobileMenu.classList.toggle("open");
 });
 
 els.mobileMenu.addEventListener("click", event => {
-  if (!event.target.closest("a")) return;
-  els.mobileMenu.classList.remove("open");
-  els.menuToggle.classList.remove("active");
+  if (event.target.closest("a")) els.mobileMenu.classList.remove("open");
 });
 
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    closeCart();
-    closeSearch();
-    els.mobileMenu.classList.remove("open");
-    els.menuToggle.classList.remove("active");
-  }
+  if (event.key === "Escape") closeCart();
 });
 
 els.year.textContent = String(new Date().getFullYear());
-updateSectionTitle();
 renderProducts();
 renderCart();
