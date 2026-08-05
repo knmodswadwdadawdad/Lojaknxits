@@ -3,147 +3,152 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#050b18" />
+  <meta name="theme-color" content="#07111f" />
   <meta name="description" content="KNXITS Store — loja dark blue de sensibilidades e configurações para jogos mobile." />
   <title>KNXITS Store — Sensi para jogos</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="bg-orb orb-one"></div>
-  <div class="bg-orb orb-two"></div>
+  <div class="page-glow glow-left"></div>
+  <div class="page-glow glow-right"></div>
+
+  <div class="top-alert">
+    <span>NOVA LOJA KNXITS</span>
+    <strong>Sensibilidades digitais com entrega preparada para automação</strong>
+  </div>
 
   <header class="app-header">
     <div class="container header-content">
+      <button class="icon-button menu-button" id="menuToggle" type="button" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+
       <a class="brand" href="#inicio" data-route="home" aria-label="Página inicial KNXITS">
-        <span class="brand-icon">K</span>
-        <span class="brand-text">
+        <span class="brand-logo">K</span>
+        <span class="brand-copy">
           <strong>KNXITS</strong>
           <small>Sensi Store</small>
         </span>
       </a>
 
-      <nav class="nav-links" aria-label="Navegação principal">
-        <a href="#inicio" data-route="home">Início</a>
-        <a href="#produtos" data-route="home">Produtos</a>
-        <a href="#como-funciona" data-route="home">Como funciona</a>
-        <a href="#faq" data-route="home">FAQ</a>
-      </nav>
+      <label class="header-search" aria-label="Pesquisar produto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
+        <input id="topSearch" type="search" placeholder="Pesquisar produto" autocomplete="off" />
+      </label>
 
       <div class="header-actions">
-        <button class="icon-button" id="searchFocus" type="button" aria-label="Buscar produto">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.4-4.4M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
+        <button class="icon-button mobile-search" id="searchFocus" type="button" aria-label="Pesquisar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
         </button>
-        <button class="account-button" type="button">Minha Conta</button>
-        <button class="menu-button" id="menuToggle" type="button" aria-label="Abrir menu">
-          <span></span><span></span><span></span>
+        <button class="cart-button" id="cartToggle" type="button" aria-label="Abrir pedido">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.3a2 2 0 0 0 2-1.6L20.5 8H6.2"/><path d="M9.2 20h.1M17.2 20h.1"/></svg>
+          <span id="cartCount">0</span>
         </button>
+        <button class="account-button" type="button">Entrar</button>
       </div>
     </div>
 
     <nav class="mobile-menu" id="mobileMenu" aria-label="Menu mobile">
       <a href="#inicio" data-route="home">Início</a>
       <a href="#produtos" data-route="home">Produtos</a>
-      <a href="#como-funciona" data-route="home">Como funciona</a>
-      <a href="#faq" data-route="home">FAQ</a>
+      <a href="#categorias" data-route="home">Categorias</a>
+      <a href="#faq" data-route="home">Dúvidas</a>
     </nav>
   </header>
 
   <main>
     <section class="view view-active" id="homeView">
       <section class="hero" id="inicio">
-        <div class="container hero-grid">
+        <div class="container hero-card">
           <div class="hero-copy">
-            <span class="kicker">Loja digital dark blue</span>
-            <h1>Sensi pronta, compra rápida e visual premium.</h1>
-            <p>Uma loja limpa em tema azul escuro para vender configurações digitais. O cliente escolhe o produto, abre a descrição e finaliza no Pix, cartão ou crypto.</p>
+            <span class="eyebrow">KNXITS STORE</span>
+            <h1>Sensi mobile com visual de loja premium.</h1>
+            <p>Escolha uma configuração, veja todos os detalhes do produto e finalize no Pix, cartão ou crypto moedas quando o pagamento real for conectado.</p>
             <div class="hero-actions">
               <a class="primary-button" href="#produtos">Ver produtos</a>
-              <a class="outline-button" href="#como-funciona">Como funciona</a>
+              <a class="ghost-button" href="#categorias">Explorar categorias</a>
             </div>
           </div>
 
-          <div class="hero-phone" aria-hidden="true">
-            <div class="phone-shell">
-              <div class="phone-top"><span></span></div>
-              <div class="phone-logo"><i>◆</i><strong>KNX Pay</strong></div>
+          <div class="hero-device" aria-hidden="true">
+            <div class="device-shell">
+              <div class="device-top"></div>
+              <div class="pay-logo"><span>◆</span><strong>KNX Pay</strong></div>
               <p>Cobrança gerada</p>
-              <span>Valor</span>
+              <small>Valor</small>
               <h2>R$ 149,90</h2>
-              <div class="mini-qr"><i></i></div>
-              <small>Seus dados estão protegidos</small>
+              <div class="fake-qr compact-qr"></div>
+              <em>Seus dados estão protegidos</em>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="categories" id="categorias">
+        <div class="container">
+          <div class="category-banner">
+            <div>
+              <span>Categoria em destaque</span>
+              <h2>Sensi FFH4X Android</h2>
+              <p>Configs focadas em controle, puxada e adaptação ao seu aparelho.</p>
+            </div>
+            <a href="#produtos" class="banner-button">Ver produtos</a>
+          </div>
+
+          <div class="category-grid">
+            <button class="category-pill active" data-filter="all" type="button">Todos</button>
+            <button class="category-pill" data-filter="free-fire" type="button">Free Fire</button>
+            <button class="category-pill" data-filter="blood-strike" type="button">Blood Strike</button>
+            <button class="category-pill" data-filter="cod-mobile" type="button">COD Mobile</button>
+            <button class="category-pill" data-filter="pack" type="button">Pacotes</button>
           </div>
         </div>
       </section>
 
       <section class="products" id="produtos">
         <div class="container">
-          <div class="section-title-row">
+          <div class="section-head">
             <div>
-              <span class="kicker">Catálogo</span>
-              <h2>Produtos disponíveis</h2>
+              <span class="eyebrow">Catálogo</span>
+              <h2>Produtos mais vendidos</h2>
             </div>
-            <p>Cards escuros, limpos e organizados para o cliente entender rápido o que está comprando.</p>
+            <button class="view-all-button" type="button" data-filter="all">Ver todos</button>
           </div>
 
-          <div class="toolbar">
-            <div class="filter-row" id="filters">
-              <button class="filter active" type="button" data-filter="all">Todos</button>
-              <button class="filter" type="button" data-filter="free-fire">Free Fire</button>
-              <button class="filter" type="button" data-filter="blood-strike">Blood Strike</button>
-              <button class="filter" type="button" data-filter="cod-mobile">COD Mobile</button>
-            </div>
-            <label class="search-box">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.4-4.4M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
-              <input id="productSearch" type="search" placeholder="Buscar sensi..." autocomplete="off" />
-            </label>
-          </div>
+          <label class="mobile-catalog-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
+            <input id="catalogSearch" type="search" placeholder="Buscar sensi..." autocomplete="off" />
+          </label>
 
           <div class="product-grid" id="productGrid"></div>
           <div class="empty-state" id="emptyState">
             <strong>Nenhum produto encontrado</strong>
-            <p>Tente outro filtro ou outra palavra.</p>
+            <p>Tente outro nome ou categoria.</p>
           </div>
         </div>
       </section>
 
-      <section class="steps" id="como-funciona">
-        <div class="container">
-          <div class="section-title-row">
-            <div>
-              <span class="kicker">Fluxo</span>
-              <h2>Compra em três passos</h2>
-            </div>
-          </div>
-          <div class="step-grid">
-            <article><span>1</span><h3>Abre o produto</h3><p>O cliente vê imagem, descrição, compatibilidade e preço.</p></article>
-            <article><span>2</span><h3>Escolhe o pagamento</h3><p>Pix, cartão ou crypto moedas em uma tela dark azul.</p></article>
-            <article><span>3</span><h3>Recebe a sensi</h3><p>Depois conectamos backend e webhook para liberar automaticamente.</p></article>
-          </div>
+      <section class="benefits">
+        <div class="container benefits-grid">
+          <article><span>◇</span><strong>Pagamento seguro</strong><small>Checkout preparado para API</small></article>
+          <article><span>↯</span><strong>Entrega digital</strong><small>Pronta para automação</small></article>
+          <article><span>☊</span><strong>Suporte</strong><small>Organizado por pedido</small></article>
         </div>
       </section>
 
       <section class="faq" id="faq">
         <div class="container">
-          <div class="section-title-row">
-            <div>
-              <span class="kicker">Dúvidas</span>
-              <h2>Perguntas frequentes</h2>
-            </div>
+          <div class="section-head simple">
+            <div><span class="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div>
           </div>
           <div class="faq-list">
-            <details>
-              <summary>O pagamento já está funcionando?</summary>
-              <p>A tela está pronta, mas ainda precisa conectar uma API real e webhook para confirmar pedidos com segurança.</p>
-            </details>
-            <details>
-              <summary>Dá para vender Pix, cartão e crypto?</summary>
-              <p>Sim. A interface já tem as três opções; depois conectamos cada uma no provedor correto.</p>
-            </details>
+            <details><summary>O pagamento já funciona de verdade?</summary><p>A interface está pronta, mas ainda precisa conectar uma API real e webhook para confirmar pagamentos com segurança.</p></details>
+            <details><summary>Posso usar imagens reais dos produtos?</summary><p>Sim. Depois é só trocar as artes CSS por URLs ou uploads das suas thumbnails.</p></details>
+            <details><summary>Esse site vende cheat?</summary><p>Não. A estrutura está pensada para vender sensibilidade, configurações e guias digitais, sem arquivos de trapaça ou modificação de jogo.</p></details>
           </div>
         </div>
       </section>
@@ -153,23 +158,24 @@
       <div class="container page-container">
         <button class="back-button" type="button" data-back-home>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-          Voltar para produtos
+          Voltar para loja
         </button>
 
         <div class="product-detail-layout">
-          <div class="detail-image-card">
+          <div class="detail-art-wrap">
             <div class="product-art detail-art" id="detailArt">
               <span class="art-badge" id="detailBadge">Free Fire</span>
-              <div class="art-device"><span></span><span></span><span></span><span></span></div>
+              <div class="art-shine"></div>
               <strong id="detailArtTitle">Sensi Pro</strong>
               <small id="detailArtSubtitle">Configuração digital</small>
             </div>
           </div>
 
-          <article class="detail-info-card">
-            <span class="kicker" id="detailLabel">Produto</span>
+          <article class="detail-card">
+            <span class="eyebrow" id="detailLabel">Produto</span>
             <h1 id="detailTitle">Nome do produto</h1>
             <p id="detailDescription">Descrição do produto.</p>
+
             <div class="detail-price-row">
               <div>
                 <span class="old-price" id="detailOldPrice">R$ 0,00</span>
@@ -178,11 +184,13 @@
               </div>
               <span class="discount-pill" id="detailDiscount">-0%</span>
             </div>
+
             <div class="detail-box"><h3>O que você recebe</h3><ul id="detailIncludes"></ul></div>
-            <div class="detail-box soft-box"><h3>Compatibilidade</h3><p id="detailCompatibility">Android mobile.</p></div>
+            <div class="detail-box muted-box"><h3>Compatibilidade</h3><p id="detailCompatibility">Android mobile.</p></div>
+
             <div class="detail-actions">
               <button class="primary-button large" type="button" id="goCheckoutButton">Comprar agora</button>
-              <button class="outline-button large" type="button" id="copyProductButton">Copiar nome</button>
+              <button class="ghost-button large" type="button" id="copyProductButton">Copiar nome</button>
             </div>
           </article>
         </div>
@@ -197,23 +205,23 @@
         </button>
 
         <div class="checkout-layout">
-          <aside class="pay-phone-card">
+          <aside class="pay-showcase">
             <div class="pay-phone">
-              <div class="phone-top"><span></span></div>
-              <div class="phone-logo"><i>◆</i><strong>KNX Pay</strong></div>
+              <div class="device-top"></div>
+              <div class="pay-logo"><span>◆</span><strong>KNX Pay</strong></div>
               <p id="paymentStatusTitle">Cobrança gerada</p>
-              <span>Valor</span>
+              <small>Valor</small>
               <h2 id="summaryTotalPhone">R$ 0,00</h2>
-              <div class="qr-card">
-                <small>Escaneie o QR Code para pagar</small>
-                <div class="qr-code" aria-hidden="true"></div>
+              <div class="qr-panel">
+                <span>Escaneie o QR Code para pagar</span>
+                <div class="fake-qr"></div>
               </div>
               <em>Seus dados estão protegidos</em>
             </div>
           </aside>
 
-          <section class="payment-card">
-            <span class="kicker">Checkout</span>
+          <section class="checkout-card">
+            <span class="eyebrow">Checkout</span>
             <h1>Finalizar compra</h1>
             <div class="summary-product">
               <div class="summary-thumb product-art" id="summaryArt"></div>
