@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="KNXITS Store — loja limpa e moderna de sensibilidades e configurações para jogos mobile." />
+  <meta name="description" content="KNXITS Store — loja limpa de sensibilidades e configurações para jogos mobile." />
   <title>KNXITS Store — Sensi para jogos</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,10 +34,7 @@
         <button class="icon-button" id="searchFocus" type="button" aria-label="Buscar produto">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.4-4.4M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
         </button>
-        <button class="cart-button" id="cartToggle" type="button" aria-label="Abrir pedido">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 6h14l-1.8 8.6a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L5.3 3.5H3"/><path d="M9.2 20.2h.1M17.2 20.2h.1"/></svg>
-          <span id="cartCount">0</span>
-        </button>
+        <button class="account-button" type="button">Minha Conta</button>
         <button class="menu-button" id="menuToggle" type="button" aria-label="Abrir menu">
           <span></span><span></span><span></span>
         </button>
@@ -58,107 +55,81 @@
         <div class="container hero-grid">
           <div class="hero-copy">
             <span class="kicker">Loja digital de sensibilidade</span>
-            <h1>Sensi pronta, compra simples e visual limpo.</h1>
-            <p>Escolha uma configuração, veja todos os detalhes do produto e finalize escolhendo Pix, cartão ou crypto moedas.</p>
+            <h1>Sensi pronta, organizada e fácil de comprar.</h1>
+            <p>Catálogo limpo para vender configurações digitais de jogos mobile. O cliente escolhe o produto, lê os detalhes e finaliza no método de pagamento.</p>
             <div class="hero-actions">
               <a class="primary-button" href="#produtos">Ver produtos</a>
-              <button class="ghost-button" type="button" data-scroll-categories>Explorar categorias</button>
+              <a class="outline-button" href="#como-funciona">Como funciona</a>
             </div>
           </div>
 
-          <aside class="hero-card" aria-label="Resumo da loja">
-            <div class="hero-card-top">
-              <span class="soft-icon">◎</span>
-              <span>KNXITS</span>
+          <div class="hero-panel" aria-hidden="true">
+            <div class="hero-card-preview">
+              <span>Produto em destaque</span>
+              <strong>Sensi Pro Android</strong>
+              <p>Controle + puxada</p>
+              <small>R$ 19,90</small>
             </div>
-            <h2>Entrega digital</h2>
-            <p>Fluxo preparado para liberar o produto depois da confirmação do pagamento.</p>
-            <div class="mini-stats">
-              <div><strong>Pix</strong><span>rápido</span></div>
-              <div><strong>Cartão</strong><span>checkout</span></div>
-              <div><strong>Crypto</strong><span>opcional</span></div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="categories" id="categorias">
-        <div class="container">
-          <div class="section-title-row">
-            <div>
-              <span class="kicker">Categorias</span>
-              <h2>Escolha por jogo</h2>
-            </div>
-          </div>
-
-          <div class="category-grid" id="categoryGrid">
-            <button class="category-card active" type="button" data-filter="all">
-              <span>Todos</span>
-              <strong>Catálogo completo</strong>
-            </button>
-            <button class="category-card" type="button" data-filter="free-fire">
-              <span>Free Fire</span>
-              <strong>Sensi Android</strong>
-            </button>
-            <button class="category-card" type="button" data-filter="blood-strike">
-              <span>Blood Strike</span>
-              <strong>Tracking e mira</strong>
-            </button>
-            <button class="category-card" type="button" data-filter="cod-mobile">
-              <span>COD Mobile</span>
-              <strong>Controle tático</strong>
-            </button>
           </div>
         </div>
       </section>
 
       <section class="products" id="produtos">
         <div class="container">
-          <div class="section-title-row catalog-head">
+          <div class="section-title-row">
             <div>
-              <span class="kicker">Produtos</span>
-              <h2>Sensibilidades disponíveis</h2>
+              <span class="kicker">Catálogo</span>
+              <h2>Produtos</h2>
             </div>
+            <p>Cards simples, claros e sem poluição visual.</p>
+          </div>
+
+          <div class="toolbar">
+            <div class="filter-row" id="filters">
+              <button class="filter active" data-filter="all" type="button">Todos</button>
+              <button class="filter" data-filter="free-fire" type="button">Free Fire</button>
+              <button class="filter" data-filter="blood-strike" type="button">Blood Strike</button>
+              <button class="filter" data-filter="cod-mobile" type="button">COD Mobile</button>
+            </div>
+
             <label class="search-box">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 21l-4.4-4.4M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"/></svg>
-              <input id="productSearch" type="search" placeholder="Buscar produto..." autocomplete="off" />
+              <input id="productSearch" type="search" placeholder="Buscar sensi..." autocomplete="off" />
             </label>
           </div>
 
           <div class="product-grid" id="productGrid"></div>
-
           <div class="empty-state" id="emptyState">
-            <span>⌕</span>
-            <h3>Nenhum produto encontrado</h3>
-            <p>Tente outro nome ou selecione outra categoria.</p>
+            <strong>Nenhum produto encontrado</strong>
+            <p>Tente outro nome ou categoria.</p>
           </div>
         </div>
       </section>
 
-      <section class="how" id="como-funciona">
+      <section class="steps" id="como-funciona">
         <div class="container">
           <div class="section-title-row">
             <div>
               <span class="kicker">Fluxo</span>
-              <h2>Como a compra vai funcionar</h2>
+              <h2>Como a compra funciona</h2>
             </div>
           </div>
 
           <div class="steps-grid">
             <article>
               <span>1</span>
-              <h3>Abra o produto</h3>
-              <p>O cliente vê imagem, descrição, compatibilidade, preço e tudo que está incluso.</p>
+              <h3>Escolhe o produto</h3>
+              <p>O cliente clica no card e abre uma tela com imagem, descrição e preço.</p>
             </article>
             <article>
               <span>2</span>
-              <h3>Vai para o checkout</h3>
-              <p>Depois de clicar em comprar, ele escolhe Pix, cartão ou crypto moedas.</p>
+              <h3>Clica em comprar</h3>
+              <p>Depois dos detalhes, ele avança para a tela de pagamento.</p>
             </article>
             <article>
               <span>3</span>
-              <h3>Recebe a sensi</h3>
-              <p>Quando a API de pagamento for conectada, o backend libera a entrega automática.</p>
+              <h3>Seleciona pagamento</h3>
+              <p>Pix, cartão ou crypto moedas ficam disponíveis na finalização.</p>
             </article>
           </div>
         </div>
@@ -175,16 +146,16 @@
 
           <div class="faq-list">
             <details>
-              <summary>O pagamento já está funcionando?</summary>
-              <p>A tela está pronta, mas ainda precisa conectar uma API real de pagamento e webhook para confirmar pedidos com segurança.</p>
+              <summary>O pagamento já cobra de verdade?</summary>
+              <p>Não. A tela está pronta, mas ainda precisa de API real de pagamento e webhook seguro.</p>
             </details>
             <details>
-              <summary>O produto é entregue automaticamente?</summary>
-              <p>A estrutura visual já está preparada. A entrega automática entra quando conectarmos backend, banco de dados e confirmação de pagamento.</p>
+              <summary>Posso trocar as imagens dos produtos?</summary>
+              <p>Sim. Os cards já estão preparados para receber imagem real depois.</p>
             </details>
             <details>
-              <summary>Dá para vender Pix, cartão e crypto?</summary>
-              <p>Sim. A tela já mostra as três opções. Depois conectamos cada método ao provedor correto.</p>
+              <summary>A entrega automática já está pronta?</summary>
+              <p>A parte visual está pronta. A entrega automática entra depois com backend e banco de dados.</p>
             </details>
           </div>
         </div>
@@ -202,9 +173,7 @@
           <div class="detail-image-card">
             <div class="product-art detail-art" id="detailArt">
               <span class="art-badge" id="detailBadge">Free Fire</span>
-              <div class="art-device">
-                <span></span><span></span><span></span><span></span>
-              </div>
+              <div class="art-lines"><span></span><span></span><span></span></div>
               <strong id="detailArtTitle">Sensi Pro</strong>
               <small id="detailArtSubtitle">Configuração digital</small>
             </div>
@@ -231,12 +200,12 @@
 
             <div class="detail-box soft-box">
               <h3>Compatibilidade</h3>
-              <p id="detailCompatibility">Android mobile. Ajuste final pode variar conforme aparelho, DPI e costume de mira.</p>
+              <p id="detailCompatibility">Android mobile.</p>
             </div>
 
             <div class="detail-actions">
               <button class="primary-button large" type="button" id="goCheckoutButton">Comprar agora</button>
-              <button class="outline-button large" type="button" id="copyProductButton">Copiar nome</button>
+              <button class="outline-button large" type="button" data-back-home>Escolher outro</button>
             </div>
           </article>
         </div>
